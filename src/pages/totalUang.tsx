@@ -27,16 +27,16 @@ const TotalUang = () => {
   if (summary === null) {
     return (
       <div className="bg-[rgba(0,0,0,0.2)]">
-        <h1 className="flex justify-center items-center font-bold text-4xl text-[#04387D] h-screen animate-pulse">Loading...</h1>
+        <h1 className="flex justify-center items-center font-bold text-4xl text-[#04387D] h-screen animate-pulse">
+          Loading...
+        </h1>
       </div>
     );
   }
 
   return (
-    <div className="bg-[rgba(0,0,0,0.2)] bg-cover w-screen h-screen">
-      <div className="">
-        <Navbar />
-      </div>
+    <div>
+      <Navbar />
       <div className="flex flex-col justify-center items-center">
         <h1 className="font-bold text-center my-16 text-4xl">Kotak Amal 1</h1>
         <div className="w-[400px] h-[400px] rounded-full bg-transparent border-[10px] border-[#04387D]  text-center relative">

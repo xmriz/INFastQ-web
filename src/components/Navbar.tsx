@@ -9,9 +9,9 @@ const Navbar = () => {
       {/* Navigasi */}
       <ul className="flex space-x-12 ml-64">
         <li><a href="/" className="hover:text-gray-300">Home</a></li>
-        <li><a href="#" className="hover:text-gray-300">List</a></li>
+        <li><a href="/wifi" className="hover:text-gray-300">Wi-Fi</a></li>
         <li><a href="/maps" className="hover:text-gray-300">Map</a></li>
-        <li><a href="#" className="hover:text-gray-300">Masjid</a></li>
+        <li><a href="/masjid" className="hover:text-gray-300">Masjid</a></li>
       </ul>
 
       {/* Profil Username */}
