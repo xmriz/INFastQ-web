@@ -1,20 +1,68 @@
+import { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
+import { getLocation } from "../services/location.service";
+import L, { Map, Marker } from "leaflet";
+import "leaflet/dist/leaflet.css";
 
 const Maps = () => {
+  const [latitude, setLatitude] = useState(0);
+  const [longitude, setLongitude] = useState(0);
+  const [map, setMap] = useState<Map | null>(null);
+  const [marker, setMarker] = useState<Marker | null>(null);
+
+  useEffect(() => {
+    fetchLocation();
+
+    const interval = setInterval(fetchLocation, 300);
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (latitude !== 0 && longitude !== 0) {
+      if (!map) {
+        const mapInstance = L.map("map").setView([latitude, longitude], 15);
+
+        L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+          attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+        }).addTo(mapInstance);
+
+        setMap(mapInstance);
+      }
+
+      if (map) {
+        if (marker) {
+          marker.setLatLng([latitude, longitude]);
+        } else {
+          const newMarker = L.marker([latitude, longitude]);
+          newMarker.addTo(map);
+          setMarker(newMarker);
+        }
+
+        map.panTo([latitude, longitude]);
+      }
+    }
+  }, [map, latitude, longitude, marker]);
+
+  const fetchLocation = async () => {
+    try {
+      const res = await getLocation();
+      setLatitude(res.data.latitude);
+      setLongitude(res.data.longitude);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <div>
       <Navbar />
       <div>
-        <h1 className="font-bold text-center mt-16 mb-8 text-4xl">
-          Lokasi Kotak Amal 1
-        </h1>
-        {/* embed map */}
+        <h1 className="font-bold text-center mt-16 mb-8 text-4xl">Lokasi Kotak Amal 1</h1>
         <div className="flex justify-center">
-          <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d247.5684168773097!2d107.61245700621681!3d-6.8792608776561055!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e68e7e7dabcab47%3A0x200c70b3b8281711!2skomp.%20PPTM!5e0!3m2!1sen!2sid!4v1693495957548!5m2!1sen!2sid"
-            loading="lazy"
-            className="rounded-lg border border-black w-[600px] h-[500px]"
-          ></iframe>
+          <div id="map" className="rounded-lg border border-black w-[600px] h-[500px]"></div>
         </div>
       </div>
     </div>

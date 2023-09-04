@@ -8,7 +8,7 @@ const TotalUang = () => {
   useEffect(() => {
     fetchSummary(); // Memuat data saat komponen dimuat
 
-    const interval = setInterval(fetchSummary, 1000); // Polling setiap 5 detik
+    const interval = setInterval(fetchSummary, 500);
 
     return () => {
       clearInterval(interval); // Membersihkan interval saat komponen tidak lagi digunakan

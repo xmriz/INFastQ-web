@@ -3,6 +3,7 @@ import TotalUang from './pages/totalUang';
 import Maps from './pages/maps';
 import Wifi from './pages/wifi';
 import Masjid from './pages/masjid';
+import WifiRegister from './pages/wifiRegister';
 
 const router = createBrowserRouter([
   {
@@ -20,7 +21,11 @@ const router = createBrowserRouter([
   {
     path: '/masjid',
     element: <Masjid />
-  }
+  },
+  {
+    path: '/wifiRegister',
+    element: <WifiRegister />
+  },
 ])
 
 function App() {
