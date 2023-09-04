@@ -9,6 +9,7 @@ const Maps = () => {
   const [longitude, setLongitude] = useState(0);
   const [map, setMap] = useState<Map | null>(null);
   const [marker, setMarker] = useState<Marker | null>(null);
+  const [isLoading, setIsLoading] = useState(true); // State untuk menampilkan loading
 
   useEffect(() => {
     fetchLocation();
@@ -31,6 +32,7 @@ const Maps = () => {
 
         mapInstance.whenReady(() => {
           setMap(mapInstance);
+          setIsLoading(false); // Set isLoading ke false setelah peta terdeteksi
         });
       }
 
@@ -63,7 +65,7 @@ const Maps = () => {
       setLatitude(res.data.latitude);
       setLongitude(res.data.longitude);
     } catch (err) {
-      console.log(err);
+      console.error(err);
     }
   };
 
@@ -73,7 +75,13 @@ const Maps = () => {
       <div>
         <h1 className="font-bold text-center mt-16 mb-8 text-4xl">Lokasi Kotak Amal 1</h1>
         <div className="flex justify-center">
-          <div id="map" className="rounded-lg border border-black w-[600px] h-[500px] mb-10"></div>
+          {isLoading ? (
+            // Tampilkan loading jika isLoading true
+            <div className="text-center">Loading...</div>
+          ) : (
+            // Tampilkan peta jika isLoading false
+            <div id="map" className="rounded-lg border border-black w-[600px] h-[500px] mb-10"></div>
+          )}
         </div>
       </div>
     </div>
