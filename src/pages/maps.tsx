@@ -24,27 +24,34 @@ const Maps = () => {
     if (latitude !== 0 && longitude !== 0) {
       if (!map) {
         const mapInstance = L.map("map").setView([latitude, longitude], 15);
-  
+
         L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png?v=1", {
           attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
         }).addTo(mapInstance);
-  
+
         mapInstance.whenReady(() => {
           setMap(mapInstance);
         });
       }
-      
+
       if (map) {
+        const customIcon = L.icon({
+          iconUrl: "/marker.png", // Replace with the URL of your custom icon image
+          iconSize: [48, 48], // Set the size of your custom icon
+          iconAnchor: [32, 48], // Set the anchor point of your icon
+        });
+
         if (marker) {
+          marker.setIcon(customIcon); // Update the icon if the marker already exists
           marker.setLatLng([latitude, longitude]);
         } else {
           map.whenReady(() => {
-            const newMarker = L.marker([latitude, longitude]);
+            const newMarker = L.marker([latitude, longitude], { icon: customIcon });
             newMarker.addTo(map);
             setMarker(newMarker);
           });
         }
-  
+
         map.panTo([latitude, longitude]);
       }
     }
