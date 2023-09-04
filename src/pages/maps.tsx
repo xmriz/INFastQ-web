@@ -62,7 +62,7 @@ const Maps = () => {
       <div>
         <h1 className="font-bold text-center mt-16 mb-8 text-4xl">Lokasi Kotak Amal 1</h1>
         <div className="flex justify-center">
-          <div id="map" className="rounded-lg border border-black w-[600px] h-[500px]"></div>
+          <div id="map" className="rounded-lg border border-black w-[600px] h-[500px] mb-10"></div>
         </div>
       </div>
     </div>
