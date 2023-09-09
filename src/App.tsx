@@ -1,9 +1,7 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import TotalUang from './pages/totalUang';
 import Maps from './pages/maps';
-import Wifi from './pages/wifi';
-import Masjid from './pages/masjid';
-import WifiRegister from './pages/wifiRegister';
+import MasjidLoc from './pages/masjidLoc';
 
 const router = createBrowserRouter([
   {
@@ -15,16 +13,8 @@ const router = createBrowserRouter([
     element: <Maps />
   },
   {
-    path: '/wifi',
-    element: <Wifi />
-  },
-  {
     path: '/masjid',
-    element: <Masjid />
-  },
-  {
-    path: '/wifiRegister',
-    element: <WifiRegister />
+    element: <MasjidLoc />
   },
 ])
 
