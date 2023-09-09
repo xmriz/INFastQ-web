@@ -12,7 +12,7 @@ export const postMosqueLoc = async (lat: number, lng: number) => {
   return await axios.post("https://infastq-api-production.up.railway.app/api/masjid/", data);
 }
 
-export const putMosqueLoc = async (id: number, nama:string, alamat:string, luas:number, lat: number, lng: number) => {
+export const putMosqueLoc = async (id: number, nama:string, alamat:string, luas:string, lat: string, lng: string) => {
   const data = {
     nama: nama,
     alamat: alamat,

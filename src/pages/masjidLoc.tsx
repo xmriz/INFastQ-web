@@ -12,9 +12,9 @@ const MasjidLoc: React.FC = () => {
 
   const [editedNama, setEditedNama] = useState("");
   const [editedAlamat, setEditedAlamat] = useState("");
-  const [editedLuas, setEditedLuas] = useState(0);
-  const [editedLatitude, setEditedLatitude] = useState(0);
-  const [editedLongitude, setEditedLongitude] = useState(0);
+  const [editedLuas, setEditedLuas] = useState("0");
+  const [editedLatitude, setEditedLatitude] = useState("0");
+  const [editedLongitude, setEditedLongitude] = useState("0");
 
   useEffect(() => {
     getMosqueLocation();
@@ -51,9 +51,9 @@ const MasjidLoc: React.FC = () => {
       );
       setNama(editedNama);
       setAlamat(editedAlamat);
-      setLuas(editedLuas);
-      setLatitude(editedLatitude);
-      setLongitude(editedLongitude);
+      setLuas(parseFloat(editedLuas));
+      setLatitude(parseFloat(editedLatitude));
+      setLongitude(parseFloat(editedLongitude));
       setIsEdit(false);
     } catch (err) {
       console.log(err);
@@ -118,13 +118,13 @@ const MasjidLoc: React.FC = () => {
                 Luas
               </label>
               <input
-                type="text"
+                type="number" // Menggunakan tipe "number" untuk memungkinkan desimal
                 id="enterLuas"
                 placeholder="Luas Masjid"
                 value={editedLuas}
                 className="w-full bg-neutral-200 text-dark p-3 rounded-md focus:outline-none focus:ring-sky-400 focus:ring-1 focus:border-sky-400"
                 onChange={(e) => {
-                  setEditedLuas(e.target.value);
+                  setEditedLuas(e.target.value); // Menggunakan tipe "string" untuk state
                 }}
               />
             </div>
@@ -136,13 +136,13 @@ const MasjidLoc: React.FC = () => {
                 Latitude
               </label>
               <input
-                type="text"
+                type="number" // Menggunakan tipe "number" untuk memungkinkan desimal
                 id="enterLatitude"
                 placeholder="Enter Latitude"
                 value={editedLatitude}
                 className="w-full bg-neutral-200 text-dark p-3 rounded-md focus:outline-none focus:ring-sky-400 focus:ring-1 focus:border-sky-400"
                 onChange={(e) => {
-                  setEditedLatitude(e.target.value)
+                  setEditedLatitude(e.target.value); // Menggunakan tipe "string" untuk state
                 }}
               />
             </div>
@@ -154,13 +154,13 @@ const MasjidLoc: React.FC = () => {
                 Longitude
               </label>
               <input
-                type="text"
+                type="number" // Menggunakan tipe "number" untuk memungkinkan desimal
                 id="enterLongitude"
                 placeholder="Enter Longitude"
                 value={editedLongitude}
                 className="w-full bg-neutral-200 text-dark p-3 rounded-md focus:outline-none focus:ring-sky-400 focus:ring-1 focus:border-sky-400"
                 onChange={(e) => {
-                 setEditedLongitude(e.target.value) 
+                  setEditedLongitude(e.target.value); // Menggunakan tipe "string" untuk state
                 }}
               />
             </div>
@@ -224,9 +224,9 @@ const MasjidLoc: React.FC = () => {
               setIsEdit(true);
               setEditedNama(nama);
               setEditedAlamat(alamat);
-              setEditedLuas(luas);
-              setEditedLatitude(latitude);
-              setEditedLongitude(longitude);
+              setEditedLuas(luas.toString());
+              setEditedLatitude(latitude.toString());
+              setEditedLongitude(longitude.toString());
             }}
           >
             Edit Location
