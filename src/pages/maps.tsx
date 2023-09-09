@@ -87,42 +87,50 @@ const Maps = () => {
         }
   
         map.panTo([latitude, longitude]);
+      }
   
-        if (mosqueMarker) {
-          // Hapus marker masjid lama jika ada
-          map.removeLayer(mosqueMarker);
+      if (map) {
+        // Create a marker for the mosque
+        if (!mosqueMarker) {
+          const mosqueCustomIcon = L.icon({
+            iconUrl: "/markerMosque.png",
+            iconSize: [48, 48],
+            iconAnchor: [24, 48],
+          });
+  
+          const newMosqueMarker = L.marker([mosqueLat, mosqueLong], {
+            icon: mosqueCustomIcon,
+          });
+          newMosqueMarker.addTo(map);
+          setMosqueMarker(newMosqueMarker);
+        } else {
+          // Update existing mosque marker's position
+          mosqueMarker.setLatLng([mosqueLat, mosqueLong]);
         }
   
-        const mosqueCustomIcon = L.icon({
-          iconUrl: "/markerMosque.png",
-          iconSize: [48, 48],
-          iconAnchor: [24, 48],
-        });
-  
-        const newMosqueMarker = L.marker([mosqueLat, mosqueLong], {
-          icon: mosqueCustomIcon,
-        });
-        newMosqueMarker.addTo(map);
-        setMosqueMarker(newMosqueMarker);
-  
+        // Create a dashed polyline to connect the donation box and the mosque
         if (line) {
-          // Hapus polyline lama jika ada
-          map.removeLayer(line);
-        }
-  
-        const polyline = L.polyline(
-          [
+          // Update existing polyline's coordinates
+          line.setLatLngs([
             [latitude, longitude],
             [mosqueLat, mosqueLong],
-          ],
-          {
-            color: "black",
-            dashArray: "5, 10",
-            weight: 2,
-          }
-        );
-        polyline.addTo(map);
-        setLine(polyline);
+          ]);
+        } else {
+          // Create a new polyline
+          const polyline = L.polyline(
+            [
+              [latitude, longitude],
+              [mosqueLat, mosqueLong],
+            ],
+            {
+              color: "black",
+              dashArray: "5, 10",
+              weight: 2,
+            }
+          );
+          polyline.addTo(map);
+          setLine(polyline);
+        }
       }
     }
   }, [map, latitude, longitude, marker, mosqueLat, mosqueLong, mosqueMarker, line]);
