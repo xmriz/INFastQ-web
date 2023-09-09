@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import { getMosqueLocId, putMosqueLoc } from "../services/masjidLoc.service";
+import Loading from "./Loading/loading";
 
 const MasjidLoc: React.FC = () => {
   const [isEdit, setIsEdit] = useState(false);
@@ -62,11 +63,7 @@ const MasjidLoc: React.FC = () => {
 
   if (nama === "" || alamat === "" || luas === 0 || latitude === 0 || longitude === 0) {
     return (
-      <div className="bg-[rgba(0,0,0,0.2)]">
-        <h1 className="flex justify-center items-center font-bold text-4xl text-[#04387D] h-screen animate-pulse">
-          Loading...
-        </h1>
-      </div>
+      <Loading />
     );
   }
 

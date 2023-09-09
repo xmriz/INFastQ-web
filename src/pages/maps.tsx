@@ -4,6 +4,7 @@ import { getLocation } from "../services/location.service";
 import L, { Map, Marker } from "leaflet";
 import "leaflet/dist/leaflet.css";
 import { getMosqueLocId } from "../services/masjidLoc.service";
+import Loading from "./Loading/loading";
 
 const Maps = () => {
   const [latitude, setLatitude] = useState(0);
@@ -167,11 +168,7 @@ const Maps = () => {
 
   if (latitude === 0 || longitude === 0 || mosqueLat === 0 || mosqueLong === 0) {
     return (
-      <div className="bg-[rgba(0,0,0,0.2)]">
-        <h1 className="flex justify-center items-center font-bold text-4xl text-[#04387D] h-screen animate-pulse">
-          Loading...
-        </h1>
-      </div>
+      <Loading />
     );
   }
 

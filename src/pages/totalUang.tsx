@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { getSummary, resetSummary } from "../services/summary.service";
 import Navbar from "../components/Navbar";
+import Loading from "./Loading/loading";
 
 const TotalUang = () => {
   const [summary, setSummary] = useState(null);
@@ -37,11 +38,7 @@ const TotalUang = () => {
 
   if (summary === null) {
     return (
-      <div className="bg-[rgba(0,0,0,0.2)]">
-        <h1 className="flex justify-center items-center font-bold text-4xl text-[#04387D] h-screen animate-pulse">
-          Loading...
-        </h1>
-      </div>
+      <Loading />
     );
   }
 
