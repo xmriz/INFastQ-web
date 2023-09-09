@@ -15,6 +15,7 @@ const Maps = () => {
   const [mosqueMarker, setMosqueMarker] = useState<Marker | null>(null);
   const [range, setRange] = useState(0);
   const [distanceWarning, setDistanceWarning] = useState(false);
+  const [line, setLine] = useState<L.Polyline | null>(null);
 
   useEffect(() => {
     fetchLocation();
@@ -44,6 +45,7 @@ const Maps = () => {
     }
   }, [range]);
 
+
   useEffect(() => {
     if (
       latitude !== 0 &&
@@ -53,26 +55,26 @@ const Maps = () => {
     ) {
       if (!map) {
         const mapInstance = L.map("map").setView([latitude, longitude], 15);
-
+  
         L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png?v=1", {
           attribution:
             '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
         }).addTo(mapInstance);
-
+  
         mapInstance.whenReady(() => {
           setMap(mapInstance);
         });
       }
-
+  
       if (map) {
         const customIcon = L.icon({
-          iconUrl: "/marker.png", // Replace with the URL of your custom icon image
-          iconSize: [48, 48], // Set the size of your custom icon
-          iconAnchor: [24, 24], // Set the anchor point of your icon
+          iconUrl: "/marker.png",
+          iconSize: [48, 48],
+          iconAnchor: [24, 24],
         });
-
+  
         if (marker) {
-          marker.setIcon(customIcon); // Update the icon if the marker already exists
+          marker.setIcon(customIcon);
           marker.setLatLng([latitude, longitude]);
         } else {
           map.whenReady(() => {
@@ -83,42 +85,48 @@ const Maps = () => {
             setMarker(newMarker);
           });
         }
-
+  
         map.panTo([latitude, longitude]);
-      }
-
-      if (map) {
-        // Create a marker for the mosque
-        if (!mosqueMarker) {
-          const mosqueCustomIcon = L.icon({
-            iconUrl: "/markerMosque.png", // Replace with the URL of your mosque marker image
-            iconSize: [48, 48],
-            iconAnchor: [24, 48],
-          });
-
-          const newMosqueMarker = L.marker([mosqueLat, mosqueLong], {
-            icon: mosqueCustomIcon,
-          });
-          newMosqueMarker.addTo(map);
-          setMosqueMarker(newMosqueMarker);
+  
+        if (mosqueMarker) {
+          // Hapus marker masjid lama jika ada
+          map.removeLayer(mosqueMarker);
         }
-
-        // Create a dashed polyline to connect the donation box and the mosque
+  
+        const mosqueCustomIcon = L.icon({
+          iconUrl: "/markerMosque.png",
+          iconSize: [48, 48],
+          iconAnchor: [24, 48],
+        });
+  
+        const newMosqueMarker = L.marker([mosqueLat, mosqueLong], {
+          icon: mosqueCustomIcon,
+        });
+        newMosqueMarker.addTo(map);
+        setMosqueMarker(newMosqueMarker);
+  
+        if (line) {
+          // Hapus polyline lama jika ada
+          map.removeLayer(line);
+        }
+  
         const polyline = L.polyline(
           [
             [latitude, longitude],
             [mosqueLat, mosqueLong],
           ],
           {
-            color: "black", // Set the color of the line
-            dashArray: "5, 10", // Set the dash pattern (5 pixels on, 10 pixels off)
-            weight: 2, // Set the line width
+            color: "black",
+            dashArray: "5, 10",
+            weight: 2,
           }
         );
         polyline.addTo(map);
+        setLine(polyline);
       }
     }
-  }, [map, latitude, longitude, marker, mosqueLat, mosqueLong, mosqueMarker]);
+  }, [map, latitude, longitude, marker, mosqueLat, mosqueLong, mosqueMarker, line]);
+  
 
   const fetchLocation = async () => {
     try {
@@ -156,10 +164,11 @@ const Maps = () => {
         <h1 className="font-bold text-center mt-16 mb-8 text-4xl">
           Lokasi Kotak Amal 1
         </h1>
+        <div className="text-center mb-4">Jarak ke Masjid: {range.toFixed(4)} km</div>
         {distanceWarning && (
           <div className="fixed bottom-0 left-0 right-0 mx-auto z-50">
             <div className="bg-red-500 text-white p-3 mt-3 rounded">
-              Warning: The distance to the mosque is more than 2 km.
+              Warning: Jarak ke masjid lebih dari 2 km.
             </div>
           </div>
         )}
