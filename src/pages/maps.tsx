@@ -173,10 +173,10 @@ const Maps = () => {
   }
 
   return (
-    <div>
+    <>
       <Navbar />
-      <div>
-        <h1 className="font-bold text-center mt-16 mb-8 text-4xl">
+      <div className="flex flex-col justify-center items-center">
+        <h1 className="font-bold text-center mb-8 text-4xl mt-16">
           Lokasi Kotak Amal 1
         </h1>
         <div className="text-center mb-4">Jarak ke Masjid: {range.toFixed(4)} km</div>
@@ -194,7 +194,7 @@ const Maps = () => {
           ></div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
