@@ -76,7 +76,7 @@ const MasjidLoc: React.FC = () => {
       <>
         <Navbar />
         <div className="flex flex-col justify-center items-center mt-16">
-          <h1 className="font-bold text-center my-16 text-4xl">
+          <h1 className="font-bold text-center mb-16 text-4xl">
             Masjid Al-Zaidan
           </h1>
           {/* profile picture */}
@@ -199,7 +199,7 @@ const MasjidLoc: React.FC = () => {
       <>
         <Navbar />
         <div className="flex flex-col justify-center items-center">
-          <h1 className="font-bold text-center my-16 text-4xl mt-16">
+          <h1 className="font-bold text-center mb-16 text-4xl mt-16">
             Masjid Al-Zaidan
           </h1>
           <div className="flex justify-center mb-10">
