@@ -183,7 +183,7 @@ const Maps = () => {
   }
 
   return (
-    <> 
+    <>
       <Navbar />
       <div className="flex flex-col justify-center items-center">
         <h1 className="font-bold text-center mb-8 text-4xl mt-16">
@@ -204,17 +204,17 @@ const Maps = () => {
             id="map"
             className="rounded-lg border border-black w-[600px] h-[500px] mb-20"
           ></div>
+          <button
+            type="reset"
+            className="text-base font-semibold bg-blue-400 text-white py-2 px-8 rounded-full w-full hover:opacity-80 hover:shadow-lg transition duration-500"
+            onClick={() => {
+              fetchLocation();
+              handleRange();
+            }}
+          >
+            Fetch Maps Location
+          </button>
         </div>
-        <button
-          type="reset"
-          className="text-base font-semibold bg-blue-400 text-white py-2 px-8 rounded-full w-full hover:opacity-80 hover:shadow-lg transition duration-500"
-          onClick={() => {
-            fetchLocation();
-            handleRange();
-          }}
-        >
-          Fetch Maps Location
-        </button>
       </div>
     </>
   );
