@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Navbar from "../components/Navbar";
 import { getMosqueLocId, putMosqueLoc } from "../services/masjidLoc.service";
 import Loading from "./Loading/loading";
@@ -17,15 +17,15 @@ const MasjidLoc: React.FC = () => {
   const [editedLatitude, setEditedLatitude] = useState("0");
   const [editedLongitude, setEditedLongitude] = useState("0");
 
-  useEffect(() => {
-    getMosqueLocation();
+  // useEffect(() => {
+  //   getMosqueLocation();
 
-    const interval = setInterval(getMosqueLocation, 500);
+  //   const interval = setInterval(getMosqueLocation, 500);
 
-    return () => {
-      clearInterval(interval);
-    };
-  }, []);
+  //   return () => {
+  //     clearInterval(interval);
+  //   };
+  // }, []);
 
   const getMosqueLocation = async () => {
     try {
@@ -76,9 +76,7 @@ const MasjidLoc: React.FC = () => {
       <>
         <Navbar />
         <div className="flex flex-col justify-center items-center mt-16">
-          <h1 className="font-bold text-center my-16 text-4xl">
-            {nama}
-          </h1>
+          <h1 className="font-bold text-center my-16 text-4xl">{nama}</h1>
           {/* profile picture */}
           <div className="flex justify-center mb-10">
             <img
@@ -199,9 +197,7 @@ const MasjidLoc: React.FC = () => {
       <>
         <Navbar />
         <div className="flex flex-col justify-center items-center">
-          <h1 className="font-bold text-center mb-16 text-4xl mt-16">
-            {nama}
-          </h1>
+          <h1 className="font-bold text-center mb-16 text-4xl mt-16">{nama}</h1>
           <div className="flex justify-center mb-10">
             <img
               src="/masjid.jpg"
@@ -243,6 +239,13 @@ const MasjidLoc: React.FC = () => {
               }}
             >
               Edit Location
+            </button>
+            <button
+              type="reset"
+              className="text-base font-semibold bg-blue-400 text-white py-2 px-8 rounded-full w-full hover:opacity-80 hover:shadow-lg transition duration-500"
+              onClick={() => getMosqueLocation()}
+            >
+              Fetch Masjid Location
             </button>
           </div>
         </div>

@@ -18,25 +18,25 @@ const Maps = () => {
   const [distanceWarning, setDistanceWarning] = useState(false);
   const [line, setLine] = useState<L.Polyline | null>(null);
 
-  useEffect(() => {
-    fetchLocation();
+  // useEffect(() => {
+  //   fetchLocation();
 
-    const interval = setInterval(fetchLocation, 300);
+  //   const interval = setInterval(fetchLocation, 300);
 
-    return () => {
-      clearInterval(interval);
-    };
-  }, []);
+  //   return () => {
+  //     clearInterval(interval);
+  //   };
+  // }, []);
 
-  useEffect(() => {
-    handleRange();
+  // useEffect(() => {
+  //   handleRange();
 
-    const interval = setInterval(handleRange, 300);
+  //   const interval = setInterval(handleRange, 300);
 
-    return () => {
-      clearInterval(interval);
-    };
-  });
+  //   return () => {
+  //     clearInterval(interval);
+  //   };
+  // });
 
   useEffect(() => {
     if (range > 2) {
@@ -45,7 +45,6 @@ const Maps = () => {
       setDistanceWarning(false);
     }
   }, [range]);
-
 
   useEffect(() => {
     if (
@@ -56,24 +55,24 @@ const Maps = () => {
     ) {
       if (!map) {
         const mapInstance = L.map("map").setView([latitude, longitude], 15);
-  
+
         L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png?v=1", {
           attribution:
             '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
         }).addTo(mapInstance);
-  
+
         mapInstance.whenReady(() => {
           setMap(mapInstance);
         });
       }
-  
+
       if (map) {
         const customIcon = L.icon({
           iconUrl: "/marker.png",
           iconSize: [48, 48],
           iconAnchor: [24, 24],
         });
-  
+
         if (marker) {
           marker.setIcon(customIcon);
           marker.setLatLng([latitude, longitude]);
@@ -86,10 +85,10 @@ const Maps = () => {
             setMarker(newMarker);
           });
         }
-  
+
         map.panTo([latitude, longitude]);
       }
-  
+
       if (map) {
         // Create a marker for the mosque
         if (!mosqueMarker) {
@@ -98,7 +97,7 @@ const Maps = () => {
             iconSize: [48, 48],
             iconAnchor: [24, 48],
           });
-  
+
           const newMosqueMarker = L.marker([mosqueLat, mosqueLong], {
             icon: mosqueCustomIcon,
           });
@@ -108,7 +107,7 @@ const Maps = () => {
           // Update existing mosque marker's position
           mosqueMarker.setLatLng([mosqueLat, mosqueLong]);
         }
-  
+
         // Create a dashed polyline to connect the donation box and the mosque
         if (line) {
           // Update existing polyline's coordinates
@@ -134,8 +133,16 @@ const Maps = () => {
         }
       }
     }
-  }, [map, latitude, longitude, marker, mosqueLat, mosqueLong, mosqueMarker, line]);
-  
+  }, [
+    map,
+    latitude,
+    longitude,
+    marker,
+    mosqueLat,
+    mosqueLong,
+    mosqueMarker,
+    line,
+  ]);
 
   const fetchLocation = async () => {
     try {
@@ -166,10 +173,13 @@ const Maps = () => {
     setRange(distance);
   };
 
-  if (latitude === 0 || longitude === 0 || mosqueLat === 0 || mosqueLong === 0) {
-    return (
-      <Loading />
-    );
+  if (
+    latitude === 0 ||
+    longitude === 0 ||
+    mosqueLat === 0 ||
+    mosqueLong === 0
+  ) {
+    return <Loading />;
   }
 
   return (
@@ -179,7 +189,9 @@ const Maps = () => {
         <h1 className="font-bold text-center mb-8 text-4xl mt-16">
           Lokasi Kotak Amal 1
         </h1>
-        <div className="text-center mb-4">Jarak ke Masjid: {range.toFixed(4)} km</div>
+        <div className="text-center mb-4">
+          Jarak ke Masjid: {range.toFixed(4)} km
+        </div>
         {distanceWarning && (
           <div className="fixed bottom-0 left-0 right-0 mx-auto z-50">
             <div className="bg-red-500 text-white p-3 mt-3 rounded">
@@ -193,6 +205,16 @@ const Maps = () => {
             className="rounded-lg border border-black w-[600px] h-[500px] mb-20"
           ></div>
         </div>
+        <button
+          type="reset"
+          className="text-base font-semibold bg-blue-400 text-white py-2 px-8 rounded-full w-full hover:opacity-80 hover:shadow-lg transition duration-500"
+          onClick={() => {
+            fetchLocation();
+            handleRange();
+          }}
+        >
+          Fetch Maps Location
+        </button>
       </div>
     </>
   );
