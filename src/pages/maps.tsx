@@ -192,6 +192,16 @@ const Maps = () => {
         <div className="text-center mb-4">
           Jarak ke Masjid: {range.toFixed(4)} km
         </div>
+        <button
+          type="reset"
+          className="text-base font-semibold bg-blue-400 text-white py-2 px-8 mb-4 rounded-full w-full hover:opacity-80 hover:shadow-lg transition duration-500"
+          onClick={() => {
+            fetchLocation();
+            handleRange();
+          }}
+        >
+          Fetch Location
+        </button>
         {distanceWarning && (
           <div className="fixed bottom-0 left-0 right-0 mx-auto z-50">
             <div className="bg-red-500 text-white p-3 mt-3 rounded">
@@ -204,16 +214,6 @@ const Maps = () => {
             id="map"
             className="rounded-lg border border-black w-[600px] h-[500px] mb-20"
           ></div>
-          <button
-            type="reset"
-            className="text-base font-semibold bg-blue-400 text-white py-2 px-8 rounded-full w-full hover:opacity-80 hover:shadow-lg transition duration-500"
-            onClick={() => {
-              fetchLocation();
-              handleRange();
-            }}
-          >
-            Fetch Maps Location
-          </button>
         </div>
       </div>
     </>
