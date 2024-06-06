@@ -228,7 +228,7 @@ const MasjidLoc: React.FC = () => {
               <p className="text-base text-neutral-700">{longitude}</p>
             </div>
             <button
-              className="text-base font-semibold bg-sky-400 text-white py-2 px-8 rounded-full w-full hover:opacity-80 hover:shadow-lg transition duration-500"
+              className="text-base font-semibold bg-sky-400 text-white py-2 px-8 rounded-full w-full hover:opacity-80 hover:shadow-lg transition duration-500 mb-4"
               onClick={() => {
                 setIsEdit(true);
                 setEditedNama(nama);
