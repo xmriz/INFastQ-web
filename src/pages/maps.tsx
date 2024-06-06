@@ -183,7 +183,7 @@ const Maps = () => {
   }
 
   return (
-    <>
+    <> 
       <Navbar />
       <div className="flex flex-col justify-center items-center">
         <h1 className="font-bold text-center mb-8 text-4xl mt-16">
