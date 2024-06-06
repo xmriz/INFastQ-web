@@ -30,6 +30,7 @@ const TotalUang = () => {
       const confirm = window.confirm("Apakah anda yakin ingin mereset?");
       if (!confirm) return;
       setSummary(null);
+      fetchSummary();
       await resetSummary();
     } catch (err) {
       console.log(err);
