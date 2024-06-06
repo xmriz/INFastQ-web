@@ -242,7 +242,7 @@ const MasjidLoc: React.FC = () => {
             </button>
             <button
               type="reset"
-              className="text-base font-semibold bg-blue-400 text-white py-2 px-8 rounded-full w-full hover:opacity-80 hover:shadow-lg transition duration-500"
+              className="text-base font-semibold bg-blue-400 text-white py-2 px-8 rounded-full w-full hover:opacity-80 hover:shadow-lg transition duration-500 mb-10"
               onClick={() => getMosqueLocation()}
             >
               Fetch Masjid Location
