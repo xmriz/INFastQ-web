@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { getSummary, resetSummary } from "../services/summary.service";
 import Navbar from "../components/Navbar";
 import Loading from "./Loading/loading";
@@ -6,15 +6,15 @@ import Loading from "./Loading/loading";
 const TotalUang = () => {
   const [summary, setSummary] = useState(null);
 
-  // useEffect(() => {
-  //   fetchSummary(); // Memuat data saat komponen dimuat
+  useEffect(() => {
+    fetchSummary(); // Memuat data saat komponen dimuat
 
-  //   const interval = setInterval(fetchSummary, 500);
+    // const interval = setInterval(fetchSummary, 500);
 
-  //   return () => {
-  //     clearInterval(interval); // Membersihkan interval saat komponen tidak lagi digunakan
-  //   };
-  // }, []);
+    // return () => {
+    //   clearInterval(interval); // Membersihkan interval saat komponen tidak lagi digunakan
+    // };
+  }, []);
 
   const fetchSummary = async () => {
     try {

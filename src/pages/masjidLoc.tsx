@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import { getMosqueLocId, putMosqueLoc } from "../services/masjidLoc.service";
 import Loading from "./Loading/loading";
@@ -17,15 +17,15 @@ const MasjidLoc: React.FC = () => {
   const [editedLatitude, setEditedLatitude] = useState("0");
   const [editedLongitude, setEditedLongitude] = useState("0");
 
-  // useEffect(() => {
-  //   getMosqueLocation();
+  useEffect(() => {
+    getMosqueLocation();
 
-  //   const interval = setInterval(getMosqueLocation, 500);
+    // const interval = setInterval(getMosqueLocation, 500);
 
-  //   return () => {
-  //     clearInterval(interval);
-  //   };
-  // }, []);
+    // return () => {
+    //   clearInterval(interval);
+    // };
+  }, []);
 
   const getMosqueLocation = async () => {
     try {

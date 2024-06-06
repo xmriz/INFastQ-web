@@ -18,25 +18,25 @@ const Maps = () => {
   const [distanceWarning, setDistanceWarning] = useState(false);
   const [line, setLine] = useState<L.Polyline | null>(null);
 
-  // useEffect(() => {
-  //   fetchLocation();
+  useEffect(() => {
+    fetchLocation();
 
-  //   const interval = setInterval(fetchLocation, 300);
+    // const interval = setInterval(fetchLocation, 300);
 
-  //   return () => {
-  //     clearInterval(interval);
-  //   };
-  // }, []);
+    // return () => {
+    //   clearInterval(interval);
+    // };
+  }, []);
 
-  // useEffect(() => {
-  //   handleRange();
+  useEffect(() => {
+    handleRange();
 
-  //   const interval = setInterval(handleRange, 300);
+    // const interval = setInterval(handleRange, 300);
 
-  //   return () => {
-  //     clearInterval(interval);
-  //   };
-  // });
+    // return () => {
+    //   clearInterval(interval);
+    // };
+  });
 
   useEffect(() => {
     if (range > 2) {
